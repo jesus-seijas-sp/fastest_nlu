@@ -1,0 +1,11 @@
+{
+  "name": "fastest_nlu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./benchmark/index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "author": "",
+  "license": "MIT"
+}
