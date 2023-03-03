@@ -1,9 +1,7 @@
-const { Neural, measure } = require('../src');
+const { Neural } = require('../src');
 const { Bench } = require('./bench');
 const corpusEn = require('./corpus-massive-en.json');
 const corpusEs = require('./corpus-massive-es.json');
-
-const DATASET_PATH = './data/massive';
 
 function execFn({ net, data }) {
   let good = 0;
