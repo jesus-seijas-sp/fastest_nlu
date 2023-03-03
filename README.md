@@ -10,11 +10,8 @@ We will compare the speed and accuracy with RASA.
 
 ## Installation
 
-Download this repository, then:
-
-```sh
-  npm install
-```
+Download this repository.
+No need of ```npm install``` as there are no dependencies.
 
 ## Run
 
