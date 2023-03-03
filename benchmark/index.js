@@ -14,29 +14,23 @@ function execFn({ net, data }) {
   return { good, total: data.length}
 }
 
-function buildTestData(corpus) {
-  const data = [];
+function measureCorpus(corpus) {
+  const testData = [];
   corpus.data.forEach((item) => {
     item.tests.forEach((test) => {
-      data.push({ utterance: test, intent: item.intent });
+      testData.push({ utterance: test, intent: item.intent });
     });
   });
-  return data;
-}
-
-function measureCorpus(corpus) {
-  const testData = buildTestData(corpus);
   const net = new Neural();
   const hrstart = process.hrtime();
   net.train(corpus);
   const hrend = process.hrtime(hrstart);
-  console.info('Time for training time (hr): %ds %dms', hrend[0], hrend[1] / 1000000);
+  console.info('Time for training: %ds %dms', hrend[0], hrend[1] / 1000000);
   const result = execFn({ net, data: testData });
   console.log(`Accuracy: ${(result.good * 100) / result.total}`);
   const bench = new Bench({ transactionsPerRun: testData.length });
-  bench.add('exec', execFn, () => ({ net, data: testData }));
-  const benchResult = bench.measure(bench.algorithms[0]);
-  console.log(`Transactions per second: ${benchResult.transactionsPerSecond}`);
+  const benchResult = bench.measure(execFn, () => ({ net, data: testData }));
+  console.log(`Transactions per second: ${benchResult}`);
 }
 
 console.log('English corpus');
